@@ -4,6 +4,7 @@ import { BaseEntity } from 'typeorm/repository/BaseEntity'
 @Entity()
 export default class Game extends BaseEntity {
 
+    static colors: number;
   @PrimaryGeneratedColumn()
   id?: number
 
@@ -14,7 +15,7 @@ export default class Game extends BaseEntity {
   color: string
 
   @Column('json')
-  board: JSON
+  board: object
 }
 
 

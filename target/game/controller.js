@@ -14,12 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const routing_controllers_1 = require("routing-controllers");
 const entity_1 = require("./entity");
-const defaultBoard = [
-    ['o', 'o', 'o'],
-    ['o', 'o', 'o'],
-    ['o', 'o', 'o']
-];
-const colors = ["red", "blue", "green", "yellow", "magenta"];
+const gameEdit_1 = require("./gameEdit");
 let PageController = class PageController {
     getGame(id) {
         return entity_1.default.findOne(id);
@@ -36,6 +31,8 @@ let PageController = class PageController {
         return entity_1.default.merge(game, update).save();
     }
     createGame(game) {
+        game.board = gameEdit_1.defaultBoard;
+        game.color = gameEdit_1.color();
         return game.save();
     }
 };

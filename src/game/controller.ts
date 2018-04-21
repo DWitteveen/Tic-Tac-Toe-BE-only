@@ -1,13 +1,6 @@
 import { JsonController, Get, Param, Post, Put, Body, NotFoundError, HttpCode } from 'routing-controllers'
 import Game  from './entity'
-
-const defaultBoard = [
-	['o', 'o', 'o'],
-	['o', 'o', 'o'],
-	['o', 'o', 'o']
-]
-
-const colors = ["red", "blue", "green", "yellow", "magenta"]
+import {color, defaultBoard} from './gameEdit'
 
 
 @JsonController()
@@ -29,7 +22,7 @@ export default class PageController {
         return { game }
     }
 
-    //create new entity // trying to provide random-color when new game starts 
+    // Update entity  // updates the defaultBoard?
     @Put('/game/:id')
     async updateGame(
     @Param('id') id: number,
@@ -38,21 +31,24 @@ export default class PageController {
         const game = await Game.findOne(id)
         if (!game) throw new NotFoundError('Cannot find game')
         
-        //game.colors  --> name: new name
 
         return Game.merge(game, update).save()
     }
 
-    //do something with the provided entity
+    //Create new entity // trying to assign random-color to a user when new game starts
     @Post('/game')
     @HttpCode(201)
         createGame(
     @Body() game: Game
     ) {
+        game.board = defaultBoard
+        game.color = color()
         return game.save()
     }
-
-}
+    //game.colors = color()  ---> Math.random() from gameEdit
+    // set game.board === defaultBoard
+    
+}   
 
 //findOneById --> findOne
 //findOne returns a Promise, but routing-controllers will take care of that
