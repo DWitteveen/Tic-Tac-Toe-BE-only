@@ -24,7 +24,6 @@ exports.default = () => typeorm_1.createConnection({
     entities: [
         entity_1.default
     ],
-    synchronize: true,
     logging: true,
     namingStrategy: new CustomNamingStrategy()
 })

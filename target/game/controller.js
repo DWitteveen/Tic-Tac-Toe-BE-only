@@ -19,15 +19,17 @@ const defaultBoard = [
     ['o', 'o', 'o'],
     ['o', 'o', 'o']
 ];
+const colors = ["red", "blue", "green", "yellow", "magenta"];
 let PageController = class PageController {
     getGame(id) {
-        return entity_1.default.findOne[id];
+        return entity_1.default.findOne(id);
     }
-    allGames() {
-        const game = entity_1.default.find();
-        return { Game: entity_1.default };
+    async allGames() {
+        const game = await entity_1.default.find();
+        console.log(game);
+        return { game };
     }
-    async updatePage(id, update) {
+    async updateGame(id, update) {
         const game = await entity_1.default.findOne(id);
         if (!game)
             throw new routing_controllers_1.NotFoundError('Cannot find game');
@@ -48,7 +50,7 @@ __decorate([
     routing_controllers_1.Get('/game'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], PageController.prototype, "allGames", null);
 __decorate([
     routing_controllers_1.Put('/game/:id'),
@@ -57,7 +59,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
-], PageController.prototype, "updatePage", null);
+], PageController.prototype, "updateGame", null);
 __decorate([
     routing_controllers_1.Post('/game'),
     routing_controllers_1.HttpCode(201),

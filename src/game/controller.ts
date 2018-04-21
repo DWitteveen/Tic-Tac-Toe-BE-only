@@ -7,33 +7,43 @@ const defaultBoard = [
 	['o', 'o', 'o']
 ]
 
+const colors = ["red", "blue", "green", "yellow", "magenta"]
+
+
 @JsonController()
 export default class PageController {
 
+    //Retrieve information in this case by id
     @Get('/game/:id')
     getGame(
         @Param('id') id: number
     ) {
-        return Game.findOne[id]
+        return Game.findOne(id)
     }
 
+    //Retrieve info
     @Get('/game')
-    allGames() {
-        const game = Game.find()
-        return { Game }
+    async allGames() {
+        const game = await Game.find()
+        console.log(game)
+        return { game }
     }
 
+    //create new entity // trying to provide random-color when new game starts 
     @Put('/game/:id')
-    async updatePage(
+    async updateGame(
     @Param('id') id: number,
     @Body() update: Partial<Game>
     ) {
         const game = await Game.findOne(id)
         if (!game) throw new NotFoundError('Cannot find game')
+        
+        //game.colors  --> name: new name
 
         return Game.merge(game, update).save()
     }
 
+    //do something with the provided entity
     @Post('/game')
     @HttpCode(201)
         createGame(
@@ -46,3 +56,5 @@ export default class PageController {
 
 //findOneById --> findOne
 //findOne returns a Promise, but routing-controllers will take care of that
+
+//write a test about the expected returnd colors
