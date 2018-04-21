@@ -1,21 +1,24 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 import { BaseEntity } from 'typeorm/repository/BaseEntity'
-import { IsString, Length, MinLength } from 'class-validator'
+import { IsString, } from 'class-validator'
 
 @Entity()
-export default class Page extends BaseEntity {
+export default class Game extends BaseEntity {
 
   @PrimaryGeneratedColumn()
   id?: number
 
   @IsString()
-  @Length(5, 25)
   @Column('text')
-  title: string
+  name: string
 
   @IsString()
-  @MinLength(10)
   @Column('text')
-  content: string
+  color: string
 
+  @Column('json')
+  board: JSON
 }
+
+
+//@Column tries to infer dataType from js type

@@ -4,9 +4,13 @@
   "main": "target/index.js",
   "scripts": {
     "start": "node ."
-},
+  },
   "license": "MIT",
   "dependencies": {
+    "@types/koa": "^2.0.45",
+    "@types/koa-bodyparser": "^4.2.0",
+    "@types/koa-multer": "^1.0.0",
+    "@types/koa-router": "^7.0.27",
     "koa": "^2.5.0",
     "koa-bodyparser": "^4.2.0",
     "koa-multer": "^1.0.2",
@@ -14,5 +18,7 @@
     "pg": "^7.4.1",
     "routing-controllers": "^0.7.7",
     "typeorm": "^0.2.0"
-  }
+  },
+  "repository": "git@github.com:DWitteveen/assignment-week-5.git",
+  "author": "DWitteveen <d.e.j.witteveen@gmail.com>"
 }
