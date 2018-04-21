@@ -35,3 +35,8 @@ export default () =>
       namingStrategy: new CustomNamingStrategy()
   })
   .then(_ => console.log('Connected to Postgres with TypeORM'))
+
+
+  //added Game into entities path
+
+  

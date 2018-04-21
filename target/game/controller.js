@@ -14,18 +14,58 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const routing_controllers_1 = require("routing-controllers");
 const entity_1 = require("./entity");
+const defaultBoard = [
+    ['o', 'o', 'o'],
+    ['o', 'o', 'o'],
+    ['o', 'o', 'o']
+];
 let PageController = class PageController {
     getGame(id) {
         return entity_1.default.findOne[id];
     }
+    allGames() {
+        const game = entity_1.default.find();
+        return { Game: entity_1.default };
+    }
+    async updatePage(id, update) {
+        const game = await entity_1.default.findOne(id);
+        if (!game)
+            throw new routing_controllers_1.NotFoundError('Cannot find game');
+        return entity_1.default.merge(game, update).save();
+    }
+    createGame(game) {
+        return game.save();
+    }
 };
 __decorate([
-    routing_controllers_1.Get('/games/:id'),
+    routing_controllers_1.Get('/game/:id'),
     __param(0, routing_controllers_1.Param('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", entity_1.default)
+    __metadata("design:returntype", void 0)
 ], PageController.prototype, "getGame", null);
+__decorate([
+    routing_controllers_1.Get('/game'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], PageController.prototype, "allGames", null);
+__decorate([
+    routing_controllers_1.Put('/game/:id'),
+    __param(0, routing_controllers_1.Param('id')),
+    __param(1, routing_controllers_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Object]),
+    __metadata("design:returntype", Promise)
+], PageController.prototype, "updatePage", null);
+__decorate([
+    routing_controllers_1.Post('/game'),
+    routing_controllers_1.HttpCode(201),
+    __param(0, routing_controllers_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [entity_1.default]),
+    __metadata("design:returntype", void 0)
+], PageController.prototype, "createGame", null);
 PageController = __decorate([
     routing_controllers_1.JsonController()
 ], PageController);

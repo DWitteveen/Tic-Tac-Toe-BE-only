@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "target/index.js",
   "scripts": {
-    "start": "node ."
+    "start": "node .",
+    "start": "nodemon ."
   },
   "license": "MIT",
   "dependencies": {
