@@ -1,6 +1,6 @@
 import { JsonController, Get, Param, Post, Put, Body, NotFoundError, HttpCode } from 'routing-controllers'
 import Game  from './entity'
-import {color, defaultBoard} from './gameEdit'
+import {color, defaultBoard, moves} from './gameEdit'
 // import { Contains } from 'class-validator';
 //imported Game class from entity.ts
 //imported the color function and default board var.
@@ -32,22 +32,31 @@ export default class PageController {
     ) {
         const game = await Game.findOne(id)
         if (!game) throw new NotFoundError('Cannot find game')
-        
+
+        // check if defaultBoard and update.board are not equal to 1 else throw in an error
+        if (moves(game.board, update.board ) !== 1) 
+        throw new NotFoundError('only one move p/p') 
+        //not sure if this this is correct!!
 
         return Game.merge(game, update).save()
     }
 
+    
     //Create new entity // assign random-color to a user when new game starts
     @Post('/game')
     @HttpCode(201)
         createGame(
     @Body() game: Game
     ) {
-        if (game.color) //=== "red" || "blue" || "green" || "yellow" || "magenta"
+        if (game.color) //!== "red" || "blue" || "green" || "yellow" || "magenta"
         throw new NotFoundError('Not a valid color')
-         
+        
         game.color = color()
         game.board = defaultBoard
+        //default board is initiated, user makes a mover
+        
+        if (moves) 
+
         return game.save()
            
     }
@@ -61,10 +70,11 @@ export default class PageController {
 
 //write a test about the expected returnd colors
 
-  // @Body() color: colorsList
-  // @Contains(colorList)
+// @Body() color: colorsList
+// @Contains(colorList)
 
-  // import { Contains } from 'class-validator';
-  // import { colorsList } from './gameEdit'
+//async await pauses the exection of function game.findOne
 
-  //Trying to use class validator to het if the color contains one of the cololist itmes
+//@Body inject request body
+//@httpcode set custom  HTTP code
+//@param defines parameters for an object element

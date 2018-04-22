@@ -28,6 +28,8 @@ let PageController = class PageController {
         const game = await entity_1.default.findOne(id);
         if (!game)
             throw new routing_controllers_1.NotFoundError('Cannot find game');
+        if (gameEdit_1.moves(game.board, update.board) !== 1)
+            throw new routing_controllers_1.NotFoundError('only one move p/p');
         return entity_1.default.merge(game, update).save();
     }
     createGame(game) {
@@ -35,7 +37,8 @@ let PageController = class PageController {
             throw new routing_controllers_1.NotFoundError('Not a valid color');
         game.color = gameEdit_1.color();
         game.board = gameEdit_1.defaultBoard;
-        return game.save();
+        if (gameEdit_1.moves)
+            return game.save();
     }
 };
 __decorate([

@@ -24,5 +24,3 @@ export default class Game extends BaseEntity {
 //@Column tries to infer dataType from js type
 // changed board: JSON to object. Only show empty array/obejct when set JSON
 
-// static colors: number;
-
