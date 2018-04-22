@@ -8,7 +8,7 @@ export const defaultBoard = [
 
 //array for given colors
 
-const colorsList = ["red", "blue", "green", "yellow", "magenta"]
+export const colorsList = ["red", "blue", "green", "yellow", "magenta"]
 
 //a function that returns the number of changes between boards
 

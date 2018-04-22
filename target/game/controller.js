@@ -31,8 +31,8 @@ let PageController = class PageController {
         return entity_1.default.merge(game, update).save();
     }
     createGame(game) {
-        game.board = gameEdit_1.defaultBoard;
         game.color = gameEdit_1.color();
+        game.board = gameEdit_1.defaultBoard;
         return game.save();
     }
 };

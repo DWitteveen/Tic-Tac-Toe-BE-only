@@ -1,6 +1,7 @@
 import { JsonController, Get, Param, Post, Put, Body, NotFoundError, HttpCode } from 'routing-controllers'
 import Game  from './entity'
 import {color, defaultBoard} from './gameEdit'
+// import { Contains } from 'class-validator';
 //imported Game class from entity.ts
 //imported the color function and default board var.
 
@@ -36,15 +37,22 @@ export default class PageController {
         return Game.merge(game, update).save()
     }
 
-    //Create new entity // trying to assign random-color to a user when new game starts
+    //Create new entity // assign random-color to a user when new game starts
     @Post('/game')
     @HttpCode(201)
         createGame(
     @Body() game: Game
     ) {
-        game.board = defaultBoard
+        // game.color === "red" || "blue" || "green" || "yellow" || "magenta" 
         game.color = color()
+        game.board = defaultBoard
         return game.save()
+        // if ( game.color === "red" || "blue") {
+        //     return game.save() 
+        // } else {
+        //     throw new NotFoundError('Not a valid color') 
+        // } 
+        
     }
     //game.colors = color()  ---> Math.random() from gameEdit
     // set game.board === defaultBoard
@@ -55,3 +63,11 @@ export default class PageController {
 //findOne returns a Promise, but routing-controllers will take care of that
 
 //write a test about the expected returnd colors
+
+  // @Body() color: colorsList
+  // @Contains(colorList)
+
+  // import { Contains } from 'class-validator';
+  // import { colorsList } from './gameEdit'
+
+  //Trying to use class validator to het if the color contains one of the cololist itmes

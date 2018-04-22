@@ -3,7 +3,7 @@ import {createKoaServer} from "routing-controllers"
 import PageController from "./game/controller"
 import setupDb from './db'
 
-const port = process.env.PORT || 4000
+// const port = process.env.PORT || 4000
 
 const app = createKoaServer({
    controllers: [
