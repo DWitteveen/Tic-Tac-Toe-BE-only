@@ -24,7 +24,7 @@ export default class PageController {
         return { game }
     }
 
-    // Update entity  // updates the defaultBoard?
+    // Update entity  // updates the defaultBoard ...
     @Put('/game/:id')
     async updateGame(
     @Param('id') id: number,
@@ -43,16 +43,13 @@ export default class PageController {
         createGame(
     @Body() game: Game
     ) {
-        // game.color === "red" || "blue" || "green" || "yellow" || "magenta" 
+        if (game.color) //=== "red" || "blue" || "green" || "yellow" || "magenta"
+        throw new NotFoundError('Not a valid color')
+         
         game.color = color()
         game.board = defaultBoard
         return game.save()
-        // if ( game.color === "red" || "blue") {
-        //     return game.save() 
-        // } else {
-        //     throw new NotFoundError('Not a valid color') 
-        // } 
-        
+           
     }
     //game.colors = color()  ---> Math.random() from gameEdit
     // set game.board === defaultBoard
@@ -60,7 +57,7 @@ export default class PageController {
 }   
 
 //findOneById --> findOne
-//findOne returns a Promise, but routing-controllers will take care of that
+//findOne returns a Promise, 
 
 //write a test about the expected returnd colors
 

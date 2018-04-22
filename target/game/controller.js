@@ -31,6 +31,8 @@ let PageController = class PageController {
         return entity_1.default.merge(game, update).save();
     }
     createGame(game) {
+        if (game.color)
+            throw new routing_controllers_1.NotFoundError('Not a valid color');
         game.color = gameEdit_1.color();
         game.board = gameEdit_1.defaultBoard;
         return game.save();
