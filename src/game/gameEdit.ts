@@ -10,7 +10,7 @@ export const defaultBoard = [
 
 const colorsList = ["red", "blue", "green", "yellow", "magenta"]
 
-// function given by teachers
+//a function that returns the number of changes between boards
 
 export const moves = (board1, board2) => 
   board1
@@ -18,12 +18,12 @@ export const moves = (board1, board2) =>
     .reduce((a, b) => a.concat(b))
     .length
 
-    //create var mover two parameters. map board1 (row, y) 
-    //filter row and check if board2 is not equal to cell
-    //add both together and outcome plus b check length
+//pick a random color from colorList using Math.floor Math.random
+//Math.floor generates an rendom number 0 -1 
+// *.lenght of the colorlist 
+//Math.floor get it to be a whole number
 
 export const color = () => { 
    return colorsList[Math.floor(Math.random() * colorsList.length)]
 }
 
-//create new function that 

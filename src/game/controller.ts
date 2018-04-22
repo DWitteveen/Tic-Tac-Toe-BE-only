@@ -1,7 +1,8 @@
 import { JsonController, Get, Param, Post, Put, Body, NotFoundError, HttpCode } from 'routing-controllers'
 import Game  from './entity'
 import {color, defaultBoard} from './gameEdit'
-
+//imported Game class from entity.ts
+//imported the color function and default board var.
 
 @JsonController()
 export default class PageController {
