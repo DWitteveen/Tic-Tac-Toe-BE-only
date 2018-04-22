@@ -50,13 +50,13 @@ export default class PageController {
     ) {
         if (game.color) //!== "red" || "blue" || "green" || "yellow" || "magenta"
         throw new NotFoundError('Not a valid color')
-        
+        //when tries to set color throw error 
+
         game.color = color()
         game.board = defaultBoard
-        //default board is initiated, user makes a mover
+        //set random color
+        //default board is initiated,
         
-        if (moves) 
-
         return game.save()
            
     }

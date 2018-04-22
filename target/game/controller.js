@@ -37,8 +37,7 @@ let PageController = class PageController {
             throw new routing_controllers_1.NotFoundError('Not a valid color');
         game.color = gameEdit_1.color();
         game.board = gameEdit_1.defaultBoard;
-        if (gameEdit_1.moves)
-            return game.save();
+        return game.save();
     }
 };
 __decorate([
